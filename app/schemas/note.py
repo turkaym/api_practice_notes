@@ -1,17 +1,23 @@
 from pydantic import BaseModel
+from datetime import datetime
 
 
-class NotesCreate(BaseModel):
+class NoteCreate(BaseModel):
     title: str
     content: str
 
 
-class NotesUpdate(BaseModel):
+class NoteUpdate(BaseModel):
     title: str
     content: str
 
 
-class NotesOut(BaseModel):
+class NoteOut(BaseModel):
     id: int
     title: str
     content: str
+    created_at: datetime
+    updated_at: datetime
+
+    class Config:
+        from_attributes = True
