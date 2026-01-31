@@ -11,5 +11,7 @@ class Settings:
 
     DATABASE_URL: str = os.getenv("DATABASE_URL")
 
+    JWT_SECRET: str = os.getenv("JWT_SECRET")
+
 
 settings = Settings()
