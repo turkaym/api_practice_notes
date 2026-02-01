@@ -3,6 +3,9 @@ from sqlalchemy.orm import Session
 from app.db.database import get_db
 from app.schemas.note import NoteCreate, NoteUpdate, NoteOut
 from app.services import notes as note_service
+from app.core.security import get_current_user
+from app.db.models import User
+
 
 router = APIRouter(
     prefix="/notes",
@@ -16,7 +19,7 @@ def create_note(note: NoteCreate, db: Session = Depends(get_db)):
 
 
 @router.get("/", response_model=list[NoteOut])
-def get_notes(db: Session = Depends(get_db)):
+def get_notes(db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
     return note_service.get_notes(db)
 
 
